@@ -5,14 +5,17 @@ class Object
       self
    end
    
+
    # Helper functions
    def arrayify
       self
    end
    
+
    def conslist?
       false
    end
+
 
    def consify
       self

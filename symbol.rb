@@ -5,10 +5,12 @@ class Symbol
       env.lookup(self)
    end
    
+
    # Helper functions
    def arrayify
       self == :nil ? [] : self
    end
+   
    
    def conslist?
       self == :nil

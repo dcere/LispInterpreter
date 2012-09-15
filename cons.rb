@@ -1,4 +1,5 @@
 class Cons
+
    attr_reader :car, :cdr
    
    def initialize(car, cdr)
@@ -6,6 +7,7 @@ class Cons
       @cdr = cdr
    end
    
+
    # eval
    def lispeval(env, forms)
       # Handle special forms
@@ -13,13 +15,23 @@ class Cons
       
       # Handle the rest
       func = car.lispeval(env, forms)
-      return func.call(*cdr.arraify.map{|x| x.lispeval(env, forms) })
+      return func.call(*cdr.arrayify.map{|x| x.lispeval(env, forms) })
    end
-      
+   
+
    # Helper functions
-   def arraify
+   def arrayify
       return self unless conslist?
       return [car] + cdr.arrayify
    end
    
+
+   # to_sexp
+   def to_sexp
+      return "(cons #{car.to_sexp} #{cdr.to_sexp})" unless conslist?
+      sexp = arrayify.map{ |x| x.to_sexp}.join(' ')
+      puts "-- Returning #{sexp}"
+      return "(#{sexp})"
+   end
+
 end
